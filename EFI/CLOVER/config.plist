@@ -2,8 +2,6 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
-	<key>#Comment</key>
-	<string>This file is for 10.12.6+ with native KabyLake support</string>
 	<key>ACPI</key>
 	<dict>
 		<key>#Comment-SortedOrder</key>
@@ -91,6 +89,28 @@
 			<dict>
 				<key>#Comment-IRQ Fix</key>
 				<string>The following fixes may be needed for onboard audio/USB/etc</string>
+				<key>AddDTGP</key>
+				<false/>
+				<key>AddPNLF</key>
+				<false/>
+				<key>FixAirport</key>
+				<true/>
+				<key>FixHDA</key>
+				<true/>
+				<key>FixHPET</key>
+				<true/>
+				<key>FixIPIC</key>
+				<true/>
+				<key>FixRTC</key>
+				<true/>
+				<key>FixRegions</key>
+				<true/>
+				<key>FixSBUS</key>
+				<false/>
+				<key>FixShutdown</key>
+				<true/>
+				<key>FixTMR</key>
+				<false/>
 			</dict>
 			<key>Patches</key>
 			<array>
@@ -182,7 +202,7 @@
 					<key>Comment</key>
 					<string>change HDAS to HDEF</string>
 					<key>Disabled</key>
-					<false/>
+					<true/>
 					<key>Find</key>
 					<data>
 					SERBUw==
@@ -236,44 +256,16 @@
 				</dict>
 				<dict>
 					<key>Comment</key>
-					<string>change PCI0.VID to IGPU #1 (Thinkpad)</string>
+					<string>change AZAL to HDEF</string>
 					<key>Disabled</key>
-					<false/>
+					<true/>
 					<key>Find</key>
 					<data>
-					UENJMFZJRF8=
+					QVpBTA==
 					</data>
 					<key>Replace</key>
 					<data>
-					UENJMElHUFU=
-					</data>
-				</dict>
-				<dict>
-					<key>Comment</key>
-					<string>change PCI0.VID to IGPU #2 (Thinkpad)</string>
-					<key>Disabled</key>
-					<false/>
-					<key>Find</key>
-					<data>
-					VklEXwhfQURSDAAAAgA=
-					</data>
-					<key>Replace</key>
-					<data>
-					SUdQVQhfQURSDAAAAgA=
-					</data>
-				</dict>
-				<dict>
-					<key>Comment</key>
-					<string>Fix AsRock Z390 BIOS DSDT Device(RTC) bug</string>
-					<key>Disabled</key>
-					<false/>
-					<key>Find</key>
-					<data>
-					oAqTU1RBUwE=
-					</data>
-					<key>Replace</key>
-					<data>
-					oAqRCv8L//8=
+					SERFRg==
 					</data>
 				</dict>
 			</array>
@@ -291,12 +283,18 @@
 		</array>
 		<key>FixHeaders</key>
 		<true/>
+		<key>HaltEnabler</key>
+		<true/>
 		<key>SSDT</key>
 		<dict>
 			<key>DropOem</key>
 			<false/>
 			<key>Generate</key>
 			<dict>
+				<key>APLF</key>
+				<false/>
+				<key>APSN</key>
+				<false/>
 				<key>CStates</key>
 				<false/>
 				<key>PStates</key>
@@ -305,17 +303,24 @@
 				<true/>
 			</dict>
 		</dict>
+		<key>SortedOrder</key>
+		<array>
+			<string>SSDT-EC-USBX.aml</string>
+			<string>SSDT-UIAC-ALL.aml</string>
+			<string>SSDT-XOSI.aml</string>
+			<string>SSDT-PNLF.aml</string>
+		</array>
 	</dict>
 	<key>Boot</key>
 	<dict>
+		<key>#Legacy</key>
+		<string>LegacyBiosDefault</string>
 		<key>Arguments</key>
-		<string>-lilubetaall debug=0x100 -disablegfxfirmware -v darkwake=8</string>
+		<string>darkwake=8 brcmfx-driver=2 slide=129</string>
 		<key>CustomLogo</key>
 		<string>Apple</string>
 		<key>DefaultVolume</key>
 		<string>LastBootedVolume</string>
-		<key>Legacy</key>
-		<string>LegacyBiosDefault</string>
 		<key>Log</key>
 		<false/>
 		<key>NeverHibernate</key>
@@ -384,10 +389,106 @@
 				</data>
 			</dict>
 		</array>
-		<key>FakeID</key>
+		<key>Audio</key>
 		<dict>
-			<key>#Kaby Lake-Comment</key>
-			<string>To avoid automatic Clover fake device-id (Skylake) injection</string>
+			<key>Inject</key>
+			<string>No</string>
+		</dict>
+		<key>LANInjection</key>
+		<false/>
+		<key>Properties</key>
+		<dict>
+			<key>PciRoot(0x0)/Pci(0x1b,0x0)</key>
+			<dict>
+				<key>AAPL,slot-name</key>
+				<string>Internal@0,27,0</string>
+				<key>device_type</key>
+				<string>Audio device</string>
+				<key>hda-gfx</key>
+				<string>onboard-2</string>
+				<key>layout-id</key>
+				<data>
+				AwAAAA==
+				</data>
+				<key>model</key>
+				<string>Wildcat Point-LP High Definition Audio Controller</string>
+			</dict>
+			<key>PciRoot(0x0)/Pci(0x1c,0x0)/Pci(0x0,0x0)</key>
+			<dict>
+				<key>AAPL,slot-name</key>
+				<string>WLAN</string>
+				<key>compatible</key>
+				<string>pci14e4,43a3</string>
+				<key>device_type</key>
+				<string>Airport Extreme</string>
+				<key>model</key>
+				<string>DW1820A (BCM4350) 802.11ac Wireless</string>
+				<key>name</key>
+				<string>Airport</string>
+				<key>pci-aspm-default</key>
+				<integer>0</integer>
+			</dict>
+			<key>PciRoot(0x0)/Pci(0x2,0x0)</key>
+			<dict>
+				<key>AAPL,GfxYTile</key>
+				<data>
+				AQAAAA==
+				</data>
+				<key>AAPL,ig-platform-id</key>
+				<data>
+				BgAmFg==
+				</data>
+				<key>AAPL,slot-name</key>
+				<string>Internal</string>
+				<key>device-id</key>
+				<data>
+				FhYAAA==
+				</data>
+				<key>device_type</key>
+				<string>VGA compatible controller</string>
+				<key>disable-external-gpu</key>
+				<data>
+				AQAAAA==
+				</data>
+				<key>framebuffer-con1-enable</key>
+				<data>
+				AQAAAA==
+				</data>
+				<key>framebuffer-con1-type</key>
+				<data>
+				AAgAAA==
+				</data>
+				<key>framebuffer-con2-enable</key>
+				<data>
+				AQAAAA==
+				</data>
+				<key>framebuffer-con2-index</key>
+				<data>
+				/////w==
+				</data>
+				<key>framebuffer-fbmem</key>
+				<data>
+				AACQAA==
+				</data>
+				<key>framebuffer-patch-enable</key>
+				<data>
+				AQAAAA==
+				</data>
+				<key>framebuffer-portcount</key>
+				<data>
+				AgAAAA==
+				</data>
+				<key>framebuffer-stolenmem</key>
+				<data>
+				AAAwAQ==
+				</data>
+				<key>framebuffer-unifiedmem</key>
+				<data>
+				AAAAgA==
+				</data>
+				<key>model</key>
+				<string>Intel HD Graphics 5500</string>
+			</dict>
 		</dict>
 		<key>SetIntelMaxBacklight</key>
 		<false/>
@@ -466,12 +567,12 @@
 			<key>ATI</key>
 			<false/>
 			<key>Intel</key>
-			<true/>
+			<false/>
 			<key>NVidia</key>
 			<false/>
 		</dict>
 		<key>ig-platform-id</key>
-		<string>0x12345678</string>
+		<string></string>
 	</dict>
 	<key>KernelAndKextPatches</key>
 	<dict>
@@ -886,6 +987,44 @@
 				6zMPtw==
 				</data>
 			</dict>
+			<dict>
+				<key>Comment</key>
+				<string>Patch 8 apples</string>
+				<key>Disabled</key>
+				<false/>
+				<key>Find</key>
+				<data>
+				AQAAdRc=
+				</data>
+				<key>InfoPlistPatch</key>
+				<false/>
+				<key>MatchOS</key>
+				<string>10.14.x</string>
+				<key>Name</key>
+				<string>IOGraphicsFamily</string>
+				<key>Replace</key>
+				<data>
+				AQAA6xc=
+				</data>
+			</dict>
+			<dict>
+				<key>Comment</key>
+				<string>Enable TRIM for SSD</string>
+				<key>Disabled</key>
+				<false/>
+				<key>Find</key>
+				<data>
+				AEFQUExFIFNTRAA=
+				</data>
+				<key>InfoPlistPatch</key>
+				<false/>
+				<key>Name</key>
+				<string>com.apple.iokit.IOAHCIBlockStorage</string>
+				<key>Replace</key>
+				<data>
+				AAAAAAAAAAAAAAA=
+				</data>
+			</dict>
 		</array>
 	</dict>
 	<key>RtVariables</key>
@@ -894,15 +1033,61 @@
 		<string>0x28</string>
 		<key>CsrActiveConfig</key>
 		<string>0x67</string>
+		<key>ROM</key>
+		<string>UseMacAddr0</string>
 	</dict>
 	<key>SMBIOS</key>
 	<dict>
+		<key>BiosReleaseDate</key>
+		<string>04/11/2019</string>
+		<key>BiosVendor</key>
+		<string>Apple Inc.</string>
+		<key>BiosVersion</key>
+		<string>MBA71.88Z.F000.B00.1904111401</string>
+		<key>Board-ID</key>
+		<string>Mac-937CB26E2E02BB01</string>
+		<key>BoardManufacturer</key>
+		<string>Apple Inc.</string>
+		<key>BoardSerialNumber</key>
+		<string>C02TXSZ3G94091QAD</string>
+		<key>BoardType</key>
+		<integer>10</integer>
+		<key>BoardVersion</key>
+		<string>1.0</string>
+		<key>ChassisAssetTag</key>
+		<string>Air-Enclosure</string>
+		<key>ChassisManufacturer</key>
+		<string>Apple Inc.</string>
+		<key>ChassisType</key>
+		<string>0x09</string>
+		<key>EfiVersion</key>
+		<string>186.0.0.0.0</string>
+		<key>Family</key>
+		<string>MacBook Air</string>
+		<key>FirmwareFeatures</key>
+		<string>0xE00FE137</string>
+		<key>FirmwareFeaturesMask</key>
+		<string>0xFF1FFF3F</string>
+		<key>LocationInChassis</key>
+		<string>Part Component</string>
+		<key>Manufacturer</key>
+		<string>Apple Inc.</string>
+		<key>Mobile</key>
+		<true/>
+		<key>PlatformFeature</key>
+		<string>0xFFFF</string>
 		<key>ProductName</key>
-		<string>MacBookAir6,2</string>
+		<string>MacBookAir7,2</string>
 		<key>ProductName-Comment</key>
 		<string>Using Haswell MacBookAir6,2 until Clover has support for KabyLake identifiers</string>
+		<key>SerialNumber</key>
+		<string>C02TXSZ3G940</string>
+		<key>SmUUID</key>
+		<string>3793AFBE-DFDF-4B8F-B7AD-44788107EDE7</string>
 		<key>Trust</key>
 		<true/>
+		<key>Version</key>
+		<string>1.0</string>
 	</dict>
 	<key>SystemParameters</key>
 	<dict>
