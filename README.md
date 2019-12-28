@@ -1,6 +1,6 @@
 # Dell-7348-hackintosh
 
-| 规格    | 详细信息                                         |
+|         | Specs                                            |
 |---------|--------------------------------------------------|
 | Type    | Dell Inspiron 7348                               |
 | OS      | macOS Catalina 10.15.2                           |
@@ -12,13 +12,17 @@
 | Sound   | ALC3234 (ALC255, layout-id: 3/17/18/28/30).      |
 | WIFI+BT | DW1820A (14E4:43A3 with subsystem-id 0x0023)     |
 
+# Some BUGS
+- The touchpad works but sometimes will cause kernel panic when booting.
+
 # TODO-List
 
 - [ ] DSDT/SSDT patch
 - [x] Freeze issue of DW1820A
-- [ ] F11/F12 backlight control
-- [ ] iMessage/FaceTime/Siri doesn't work
-- [ ] USB port custom
-- [ ] Touchpad doesn't work
+- [x] F11/F12 backlight control, [solution](https://pqrs.org/osx/karabiner/)
+- [x] USB port custom*
+- [x] Touchpad works
 - [ ] No hibernate
+- [ ] 8 apples glitch when start up, but you can enable legacy mode to fix it
+- [ ] several reboot will into DELL ePAS diagnosis mode
 
