@@ -109,6 +109,34 @@
 					U0FUQQ==
 					</data>
 				</dict>
+				<dict>
+					<key>Comment</key>
+					<string>change _Q1C to XQ1C, pair with SSDT-BKey-Dell</string>
+					<key>Disabled</key>
+					<false/>
+					<key>Find</key>
+					<data>
+					X1ExQw==
+					</data>
+					<key>Replace</key>
+					<data>
+					WFExQw==
+					</data>
+				</dict>
+				<dict>
+					<key>Comment</key>
+					<string>change _Q1D to XQ1D, pair with SSDT-BKey-Dell</string>
+					<key>Disabled</key>
+					<false/>
+					<key>Find</key>
+					<data>
+					X1ExRA==
+					</data>
+					<key>Replace</key>
+					<data>
+					WFExRA==
+					</data>
+				</dict>
 			</array>
 			<key>SlpSmiAtWake</key>
 			<true/>
@@ -151,6 +179,7 @@
 		<key>SortedOrder</key>
 		<array>
 			<string>SSDT-XOSI.aml</string>
+			<string>SSDT-BKey-Dell.aml</string>
 		</array>
 	</dict>
 	<key>Boot</key>

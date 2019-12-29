@@ -19,9 +19,9 @@
 
 - [ ] DSDT/SSDT patch
 - [x] Freeze issue of DW1820A
-- [x] F11/F12 backlight control, [solution](https://pqrs.org/osx/karabiner/)
+- [x] F11/F12 backlight control
 - [x] USB port custom*
-- [x] Touchpad works
+- [x] Touchpad works^[ref](https://www.penghubingzhou.cn/2019/01/06/VoodooI2C%20DSDT%20Edit/)
 - [ ] No hibernate
 - [ ] 8 apples glitch when start up, but you can enable legacy mode to fix it
 - [ ] several reboot will into DELL ePAS diagnosis mode
