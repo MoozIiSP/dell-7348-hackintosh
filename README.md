@@ -3,8 +3,8 @@
 |            | Specs                                            |
 |------------|--------------------------------------------------|
 | Type       | Dell Inspiron 7348                               |
-| Bootloader | OpenCore 0.6.5                                   |
-| OS         | macOS Big Sur 11.1                               |
+| Bootloader | OpenCore 0.7.0                                   |
+| OS         | macOS Big Sur 11.4                               |
 | CPU        | Intel i7 5500U @ 2.40Ghz x2                      |
 | GPU        | Intel HD Graphics 5500 (platform-id: 0x16260006) |
 | Memory     | 8GB (built-in 1600Mhz)                           |
