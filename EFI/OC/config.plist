@@ -319,6 +319,8 @@
 			<false/>
 			<key>ResetLogoStatus</key>
 			<true/>
+			<key>SyncTableIds</key>
+			<false/>
 		</dict>
 	</dict>
 	<key>Booter</key>
@@ -403,6 +405,8 @@
 			<integer>0</integer>
 			<key>RebuildAppleMemoryMap</key>
 			<false/>
+			<key>ResizeAppleGpuBars</key>
+			<integer>-1</integer>
 			<key>SetupVirtualMap</key>
 			<true/>
 			<key>SignalAppleOS</key>
@@ -585,7 +589,7 @@
 				<key>BundlePath</key>
 				<string>Lilu.kext</string>
 				<key>Comment</key>
-				<string>Lilu</string>
+				<string>Patch engine</string>
 				<key>Enabled</key>
 				<true/>
 				<key>ExecutablePath</key>
@@ -603,7 +607,7 @@
 				<key>BundlePath</key>
 				<string>VirtualSMC.kext</string>
 				<key>Comment</key>
-				<string>SMC</string>
+				<string>SMC emulator</string>
 				<key>Enabled</key>
 				<true/>
 				<key>ExecutablePath</key>
@@ -621,7 +625,7 @@
 				<key>BundlePath</key>
 				<string>WhateverGreen.kext</string>
 				<key>Comment</key>
-				<string>Video card</string>
+				<string>Video patches</string>
 				<key>Enabled</key>
 				<true/>
 				<key>ExecutablePath</key>
@@ -675,7 +679,7 @@
 				<key>BundlePath</key>
 				<string>AppleALC.kext</string>
 				<key>Comment</key>
-				<string>Sound</string>
+				<string>Audio patches</string>
 				<key>Enabled</key>
 				<true/>
 				<key>ExecutablePath</key>
@@ -1377,6 +1381,8 @@
 		</dict>
 		<key>Scheme</key>
 		<dict>
+			<key>CustomKernel</key>
+			<false/>
 			<key>FuzzyMatch</key>
 			<true/>
 			<key>KernelArch</key>
@@ -1561,6 +1567,8 @@
 		<dict>
 			<key>7C436110-AB2A-4BBB-A880-FE41995C9F82</key>
 			<dict>
+				<key>ForceDisplayRotationInEFI</key>
+				<integer>0</integer>
 				<key>SystemAudioVolume</key>
 				<data>Rg==</data>
 				<key>boot-args</key>
@@ -1577,7 +1585,6 @@
 		<dict>
 			<key>4D1EDE05-38C7-4A6A-9CC6-4BCCA8B38C14</key>
 			<array>
-				<string>UIScale</string>
 				<string>DefaultBackgroundColor</string>
 			</array>
 			<key>4D1FDA02-38C7-4A6A-9CC6-4BCCA8B30102</key>
@@ -1587,6 +1594,7 @@
 			<key>7C436110-AB2A-4BBB-A880-FE41995C9F82</key>
 			<array>
 				<string>boot-args</string>
+				<string>ForceDisplayRotationInEFI</string>
 			</array>
 		</dict>
 		<key>LegacyEnable</key>
@@ -1634,10 +1642,10 @@
 		<dict>
 			<key>AdviseFeatures</key>
 			<false/>
-			<key>MaxBIOSVersion</key>
-			<false/>
 			<key>MLB</key>
 			<string>M0000000000000001</string>
+			<key>MaxBIOSVersion</key>
+			<false/>
 			<key>ProcessorType</key>
 			<integer>0</integer>
 			<key>ROM</key>
@@ -1687,6 +1695,8 @@
 			<string>Auto</string>
 			<key>CustomDelays</key>
 			<false/>
+			<key>GraphicsInputMirroring</key>
+			<true/>
 			<key>KeyInitialDelay</key>
 			<integer>50</integer>
 			<key>KeySubsequentDelay</key>
@@ -1721,14 +1731,86 @@
 		<true/>
 		<key>Drivers</key>
 		<array>
-			<string>OpenHfsPlus.efi</string>
-			<string>OpenRuntime.efi</string>
-			<string>OpenCanopy.efi</string>
-			<string>AudioDxe.efi</string>
-			<string>UsbMouseDxe.efi</string>
-			<string>Ps2KeyboardDxe.efi</string>
-			<string>Ps2MouseDxe.efi</string>
-			<string>CrScreenshotDxe.efi</string>
+			<dict>
+				<key>Arguments</key>
+				<string></string>
+				<key>Comment</key>
+				<string>HFS+ Driver</string>
+				<key>Enabled</key>
+				<true/>
+				<key>Path</key>
+				<string>OpenHfsPlus.efi</string>
+			</dict>
+			<dict>
+				<key>Arguments</key>
+				<string></string>
+				<key>Comment</key>
+				<string></string>
+				<key>Enabled</key>
+				<true/>
+				<key>Path</key>
+				<string>OpenRuntime.efi</string>
+			</dict>
+						<dict>
+				<key>Arguments</key>
+				<string></string>
+				<key>Comment</key>
+				<string></string>
+				<key>Enabled</key>
+				<false/>
+				<key>Path</key>
+				<string>OpenCanopy.efi</string>
+			</dict>
+						<dict>
+				<key>Arguments</key>
+				<string></string>
+				<key>Comment</key>
+				<string></string>
+				<key>Enabled</key>
+				<false/>
+				<key>Path</key>
+				<string>AudioDxe.efi</string>
+			</dict>
+			<dict>
+				<key>Arguments</key>
+				<string></string>
+				<key>Comment</key>
+				<string></string>
+				<key>Enabled</key>
+				<false/>
+				<key>Path</key>	
+				<string>UsbMouseDxe.efi</string>
+			</dict>
+			<dict>
+				<key>Arguments</key>
+				<string></string>
+				<key>Comment</key>
+				<string></string>
+				<key>Enabled</key>
+				<false/>
+				<key>Path</key>	
+				<string>Ps2KeyboardDxe.efi</string>
+			</dict>
+			<dict>
+				<key>Arguments</key>
+				<string></string>
+				<key>Comment</key>
+				<string></string>
+				<key>Enabled</key>
+				<false/>
+				<key>Path</key>
+				<string>Ps2MouseDxe.efi</string>
+			</dict>
+			<dict>
+				<key>Arguments</key>
+				<string></string>
+				<key>Comment</key>
+				<string></string>
+				<key>Enabled</key>
+				<false/>
+				<key>Path</key>
+				<string>CrScreenshotDxe.efi</string>
+			</dict>
 		</array>
 		<key>Input</key>
 		<dict>
@@ -1765,6 +1847,8 @@
 			<true/>
 			<key>ProvideConsoleGop</key>
 			<true/>
+			<key>ReconnectGraphicsOnConnect</key>
+			<false/>
 			<key>ReconnectOnResChange</key>
 			<false/>
 			<key>ReplaceTabWithSpace</key>
@@ -1775,6 +1859,8 @@
 			<false/>
 			<key>TextRenderer</key>
 			<string>BuiltinGraphics</string>
+			<key>UIScale</key>
+			<integer>0</integer>
 			<key>UgaPassThrough</key>
 			<false/>
 		</dict>
@@ -1825,8 +1911,12 @@
 			<false/>
 			<key>EnableVectorAcceleration</key>
 			<true/>
+			<key>EnableVmx</key>
+			<false/>
 			<key>ExitBootServicesDelay</key>
 			<integer>0</integer>
+			<key>ForceOcWriteFlash</key>
+			<false/>
 			<key>ForgeUefiSupport</key>
 			<false/>
 			<key>IgnoreInvalidFlexRatio</key>
@@ -1837,6 +1927,8 @@
 			<false/>
 			<key>RequestBootVarRouting</key>
 			<true/>
+			<key>ResizeGpuBars</key>
+			<integer>-1</integer>
 			<key>TscSyncTimeout</key>
 			<integer>0</integer>
 			<key>UnblockFsConnect</key>
